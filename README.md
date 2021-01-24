@@ -8,8 +8,10 @@ Sometimes you need
 For Wiringpi look here
 https://github.com/WiringPi/WiringPi/tree/final_official_2.50
 
-git clone https://github.com/WiringPi/WiringPi/tree/final_official_2.50
-cd wiringPi
-./build
+>> git clone https://github.com/WiringPi/WiringPi.git
+
+>> cd wiringPi
+
+>>./build
 
 
