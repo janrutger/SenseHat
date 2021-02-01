@@ -4,8 +4,12 @@ from sensehatb import Board
 
 def main():
     hat = Board()
-    temperature, unit = hat.temperature()
+
+    temperature, unit = hat.read("temperature")
     print(temperature, unit)
+
+    temperatureCPU, unit = hat.read("temperatureCPU")
+    print(temperatureCPU, unit)
 
 
 
