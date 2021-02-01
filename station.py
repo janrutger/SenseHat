@@ -1,8 +1,9 @@
 import time
-from sensehatb import Board as hat
+from sensehatb import Board
  
 
 def main():
+    hat = Board()
     temperature, unit = hat.temperature()
     print(temperature, unit)
 
