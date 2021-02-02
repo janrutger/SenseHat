@@ -5,11 +5,14 @@ from sensehatb import Board
 def main():
     hat = Board()
 
-    temperature, unit = hat.read("temperature")
-    print(temperature, unit)
+    parameters = hat.config()
 
-    temperatureCPU, unit = hat.read("temperatureCPU")
-    print(temperatureCPU, unit)
+    for parameter in parameters:
+        value, unit = hat.read(parameter)
+        if len(value) == 1:
+            print(parameter, value[0], unit)
+        else:
+            print(parameter, value[0], value[1], value[2], unit)
 
 
 
