@@ -1,18 +1,25 @@
 import time
+import datastore as ds
 from sensehatb import Board
+
  
 
 def main():
     hat = Board()
+    parameters = hat.config("parameters")
+    station_id = hat.config("name")
 
-    parameters = hat.config()
+    samples = ds.Datastore("lite")
+    
 
     for parameter in parameters:
-        value, unit = hat.read(parameter)
-        if len(value) == 1:
-            print(parameter, value[0], unit)
-        else:
-            print(parameter, value[0], value[1], value[2], unit)
+        value, units = hat.read(parameter)
+        samples.store_sample(station_id, parameter, value, units)
+        
+    samples = samples.read_all_samples()
+    for sample in samples:
+        print(sample)
+
 
 
 
