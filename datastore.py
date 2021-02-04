@@ -10,11 +10,11 @@ class Datastore:
         self.dbtype = type
         if self.dbtype == "lite":
             self.connection = sqlite3.connect("samples.db")
-            self.SQLcreate_samples_table()
 
         elif self.dbtype == "mem":
             self.connection = sqlite3.connect(":memory:")
-            self.SQLcreate_samples_table()
+
+        self.SQLcreate_samples_table()
         
 
     def store_sample(self, station_id, parameter, _value, units):
@@ -49,7 +49,11 @@ class Datastore:
                 value_ = (row[5],)
             else:
                 value_ = (row[5], row[6], row[7])
-            row_ = (row[1], row[2], row[3], row[4], value_, row[8])
+
+            time_at_  = datetime.strptime(row[3], "%Y-%m-%d %H:%M:%S")
+            time_for_ = datetime.strptime(row[4], "%Y-%m-%d %H:%M")
+
+            row_ = (row[0], row[1], row[2], time_at_, time_for_, value_, row[8])
             result.append(row_)
         return(result)
            

@@ -1,6 +1,7 @@
-import time
+
 import datastore as ds
 from sensehatb import Board
+from datetime import datetime
 
  
 
@@ -19,7 +20,6 @@ def main():
     samples = samples.read_all_samples()
     for sample in samples:
         print(sample)
-
 
 
 
