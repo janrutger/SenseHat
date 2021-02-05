@@ -4,7 +4,7 @@ https://www.waveshare.com/wiki/Sense_HAT_(B)
 
 HAT Status: Orderd | Shipped | countdown started | arrived
 
-All sensors works perfect with ADAfruits software
+All sensors works perfect with CircuitPython & ADAfruits software
 
 check this page https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/circuitpython-raspi
 

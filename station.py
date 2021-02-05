@@ -22,9 +22,6 @@ def main():
         
     samples = samples.read_all_samples()
 
-    # for sample in samples:
-    #     print(sample)
-
     df = pd.DataFrame(samples, columns =['sample_id', 'station_id', 'parameter', 'time_at', 'time_for', 'values', 'units']) 
     df = df.set_index('sample_id')
     print(df)
