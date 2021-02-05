@@ -2,19 +2,21 @@
 Waveshare Sense Hat (b) for RapsberyPi....
 https://www.waveshare.com/wiki/Sense_HAT_(B)
 
-HAT Status: Orderd | Shipped | countdown started
+HAT Status: Orderd | Shipped | countdown started | arrived
 
-Sometimes you need
-- sudo apt-get install dos2unix
+All sensors works perfect with ADAfruits software
 
-For Wiringpi Read this http://wiringpi.com/news/
+check this page https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/circuitpython-raspi
 
-And Look here https://github.com/WiringPi/WiringPi/tree/final_official_2.50
+and.
 
->> git clone https://github.com/WiringPi/WiringPi.git
+https://learn.adafruit.com/adafruit-sensirion-shtc3-temperature-humidity-sensor/python-circuitpython
 
->> cd wiringPi
+https://learn.adafruit.com/adafruit-lps25-pressure-sensor
 
->>./build
+https://learn.adafruit.com/adafruit-color-sensors/python-circuitpython
 
+https://learn.adafruit.com/adafruit-tdk-invensense-icm-20948-9-dof-imu/python-circuitpython
+
+https://learn.adafruit.com/adafruit-4-channel-adc-breakouts/python-circuitpython
 
