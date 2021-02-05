@@ -4,9 +4,12 @@ https://www.waveshare.com/wiki/Sense_HAT_(B)
 
 HAT Status: Orderd | Shipped | countdown started | arrived
 
-All sensors works perfect with ADAfruits softwsre
+All sensors works perfect with ADAfruits software
+
 check this page https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/circuitpython-raspi
+
 and.
+
 https://learn.adafruit.com/adafruit-sensirion-shtc3-temperature-humidity-sensor/python-circuitpython
 https://learn.adafruit.com/adafruit-lps25-pressure-sensor
 https://learn.adafruit.com/adafruit-color-sensors/python-circuitpython
