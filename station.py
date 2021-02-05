@@ -14,7 +14,7 @@ def main():
     parameters = hat.config("parameters")
     station_id = hat.config("name")
 
-    samples = ds.Datastore("lite")
+    samples = ds.Datastore("mem")
     
 
     for parameter in parameters:

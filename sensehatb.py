@@ -4,8 +4,14 @@ import board
 #import digitalio
 import busio
 
-import adafruit_shtc3
 from gpiozero import CPUTemperature
+import adafruit_shtc3
+import adafruit_lps2x
+import adafruit_tcs34725
+import adafruit_icm20x
+import adafruit_ads1x15.ads1015 as ADS
+from adafruit_ads1x15.analog_in import AnalogIn
+
 
 
 
@@ -19,7 +25,7 @@ class  Board:
 
     def config(self, part):
         if part == "parameters":
-            return(["temperature", "temperatureCPU"])
+            return(["temperatureCPU", "temperature"])
         if part == "name":
             return(self.station_id)
 
