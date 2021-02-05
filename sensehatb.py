@@ -24,12 +24,16 @@ class  Board:
         self.sht = adafruit_shtc3.SHTC3(self.i2c)
         self.lps = adafruit_lps2x.LPS22(self.i2c, 0x5c)
         self.tcs = adafruit_tcs34725.TCS34725(self.i2c)
+        self.icm = adafruit_icm20x.ICM20948(self.i2c, 0x68)
+        self.ads = ADS.ADS1015(self.i2c)
 
     def config(self, part):
         if part == "parameters":
             return(["temperatureCPU", "temperature", "Humidity",
             "temperature2", "pressure",
-            "lux", "color-temparature", "color-rgb"])
+            "lux", "color-temparature", "color-rgb",
+            "acceleration", "gyro", "magnetic",
+            "external1", "external2", "external3", "external4"])
         if part == "name":
             return(self.station_id)
 
@@ -65,4 +69,36 @@ class  Board:
         elif parameter == "color-rgb":
             value = (self.tcs.color_rgb_bytes)
             unit = "RGB"
+            return(value, unit)
+        elif parameter == "acceleration":
+            value = (self.icm.acceleration)
+            unit = "m/s²"
+            return(value, unit)
+        elif parameter == "gyro":
+            value = (self.icm.gyro)
+            unit = "Rads/s"
+            return(value, unit)
+        elif parameter == "magnetic":
+            value = (self.icm.magnetic)
+            unit = "uT"
+            return(value, unit)
+        elif parameter == "external1":
+            chan = AnalogIn(self.ads, ADS.P0)
+            value = (chan.voltage,)
+            unit = "mV"
+            return(value, unit)
+        elif parameter == "external2":
+            chan = AnalogIn(self.ads, ADS.P1)
+            value = (chan.voltage,)
+            unit = "mV"
+            return(value, unit)
+        elif parameter == "external3":
+            chan = AnalogIn(self.ads, ADS.P2)
+            value = (chan.voltage,)
+            unit = "mV"
+            return(value, unit)
+        elif parameter == "external4":
+            chan = AnalogIn(self.ads, ADS.P3)
+            value = (chan.voltage,)
+            unit = "mV"
             return(value, unit)
