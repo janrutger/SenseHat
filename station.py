@@ -2,7 +2,6 @@
 import datastore as ds
 from sensehatb import Board
 
-#from datetime import datetime
 import pandas as pd
 #import matplotlib.pyplot as plt 
  
