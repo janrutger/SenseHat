@@ -2,13 +2,13 @@
 from hashlib import sha256
 from datetime import datetime
 
-import SQLcmds as database
+import DBcommands as dbc
 
 
 class Datastore:
     def __init__(self, type):
         self.dbtype = type
-        self.SQL = database.SQL(self.dbtype)
+        self.SQL = dbc.SQL(self.dbtype)
         self.SQL.SQLcreate_samples_table()
         
 
