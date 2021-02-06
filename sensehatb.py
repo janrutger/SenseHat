@@ -14,7 +14,6 @@ from adafruit_ads1x15.analog_in import AnalogIn
 
 
 
-
 class  Board:
     def __init__(self):
         self.i2c = busio.I2C(board.SCL, board.SDA)
@@ -23,7 +22,10 @@ class  Board:
         self.cpu = CPUTemperature()
         self.sht = adafruit_shtc3.SHTC3(self.i2c)
         self.lps = adafruit_lps2x.LPS22(self.i2c, 0x5c)
+
         self.tcs = adafruit_tcs34725.TCS34725(self.i2c)
+        self.tcs.integration_time = 200
+
         self.icm = adafruit_icm20x.ICM20948(self.i2c, 0x68)
         self.ads = ADS.ADS1015(self.i2c)
 
@@ -31,7 +33,7 @@ class  Board:
         if part == "parameters":
             return(["temperatureCPU", "temperature", "Humidity",
             "temperature2", "pressure",
-            "lux", "color-temparature", "color-rgb",
+            "lux", "color-temperature", "color-rgb",
             "acceleration", "gyro", "magnetic",
             "external1", "external2", "external3", "external4"])
         if part == "name":
@@ -62,7 +64,7 @@ class  Board:
             value = (self.tcs.lux,)
             unit = "lux"
             return(value, unit)
-        elif parameter == "color-temparature":
+        elif parameter == "color-temperature":
             value = (self.tcs.color_temperature,)
             unit = "K"
             return(value, unit)
