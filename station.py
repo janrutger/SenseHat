@@ -13,14 +13,15 @@ def main():
     parameters = hat.config("parameters")
     station_id = hat.config("name")
 
-    samples = ds.Datastore("mem")
+    samplesDB = ds.Datastore("mem")
     
 
     for parameter in parameters:
         value, units = hat.read(parameter)
-        samples.store_sample(station_id, parameter, value, units)
+        samplesDB.store_sample(station_id, parameter, value, units)
         
-    samples = samples.read_all_samples()
+    samples = samplesDB.read_all_samples()
+
 
     df = pd.DataFrame(samples, columns =['sample_id', 'station_id', 'parameter', 'time_at', 'time_for', 'values', 'units']) 
     df = df.set_index('sample_id')
