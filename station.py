@@ -1,5 +1,6 @@
 
 import datastore as ds
+import datasender as sender
 from sensehatb import Board
 
 import pandas as pd
@@ -22,6 +23,8 @@ def main():
         
     samples = samplesDB.read_all_samples()
 
+    sender.send_samples(samples)
+    
 
     df = pd.DataFrame(samples, columns =['sample_id', 'station_id', 'parameter', 'time_at', 'time_for', 'values', 'units']) 
     df = df.set_index('sample_id')
