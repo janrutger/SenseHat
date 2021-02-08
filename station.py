@@ -12,7 +12,7 @@ import pandas as pd
 def main():
     hat = Board()
     parameters = hat.config("parameters")
-    parameters = "temperature, temperatureCPU"
+    parameters = "temperature", "temperatureCPU"
     station_id = hat.config("name")
 
     samplesDB = ds.Datastore("mem")
