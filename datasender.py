@@ -9,12 +9,12 @@ class Datasender:
         self.headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
 
-    def jsondefault(self, field):
+    def jsondefaults(self, field):
         if isinstance(field, (datetime.date, datetime.datetime)):
             return field.isoformat()
 
 
     def send_samples(self, samples2send):
-        json2send = json.dumps(samples2send, default=self.jsondefault)
+        json2send = json.dumps(samples2send, default=self.jsondefaults)
         result = requests.post(self.url, data=(json2send), headers=self.headers)
         return(result)
