@@ -1,6 +1,6 @@
 
 import datastore as ds
-import datasender as sender
+import datasender as dsend
 from sensehatb import Board
 
 import pandas as pd
@@ -15,6 +15,7 @@ def main():
     station_id = hat.config("name")
 
     samplesDB = ds.Datastore("mem")
+    sender = dsend.Datasender()
     
 
     for parameter in parameters:
@@ -23,7 +24,8 @@ def main():
         
     samples = samplesDB.read_all_samples()
 
-    sender.send_samples(samples)
+    result = sender.send_samples(samples)
+    print(result)
     
 
     df = pd.DataFrame(samples, columns =['sample_id', 'station_id', 'parameter', 'time_at', 'time_for', 'values', 'units']) 
