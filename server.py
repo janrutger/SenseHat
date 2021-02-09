@@ -5,18 +5,22 @@ import datastore as ds
 urls = (
     '/(.*)', 'hello'
 )
+
+
+
 app = web.application(urls, globals())
 
-database = ds.Datastore("mem")
+#database = ds.Datastore("mem")
 
 class hello:
+    def __init__(self):
+        database = ds.Datastore("lite")
     def GET(self, name):
         if not name:
             name = 'World'
         return 'Hello, ' + name + '!'
 
     def POST(self, x):
-        database = ds.Datastore("mem")
         data = str(web.data(), 'utf-8')
         data = json.loads(data)
         #print(type(data), data)
