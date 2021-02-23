@@ -19,10 +19,10 @@ def main():
     samplesDB = ds.Datastore("mem")
     sender = dsend.Datasender()
 
-    sampleFreq = 60 # in seconden (1 minuut)
+    sampleFreq = 6 # in seconden (1 minuut)
     collect = True
     lastSendTime = time.time()
-    sendFreq = 300 # in seconden (5 minuten)
+    sendFreq = 30 # in seconden (5 minuten)
 
     while collect:
         starttime = time.time()
@@ -34,8 +34,9 @@ def main():
             newSamples = samplesDB.read_new_samples()
             #print("send data", newSample)
             result = sender.send_samples(newSamples)
-            samplesDB.update_sample_status(newSamples, "send")
-            lastSendTime = time.time()
+            if result != "error":
+                samplesDB.update_sample_status(newSamples, "send")
+                lastSendTime = time.time()
         else:
             print(time.time() - lastSendTime)
 

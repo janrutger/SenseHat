@@ -16,5 +16,8 @@ class Datasender:
 
     def send_samples(self, samples2send):
         json2send = json.dumps(samples2send, default=self.jsondefaults)
-        result = requests.post(self.url, data=(json2send), headers=self.headers)
-        return(result)
+        try:
+            result = requests.post(self.url, data=(json2send), headers=self.headers, timeout=5)
+            #return(result)
+        except requests.ConnectionError:
+            return("error")

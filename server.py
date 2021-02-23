@@ -3,7 +3,7 @@ import json
 import datastore as ds
 
 urls = (
-    '/(.*)', 'hello'
+    '/(.*)', 'root'
 )
 
 
@@ -12,15 +12,13 @@ app = web.application(urls, globals())
 
 #database = ds.Datastore("mem")
 
-class hello:
+class root:
     def __init__(self):
         pass
         #database = ds.Datastore("lite")
 
     def GET(self, name):
-        if not name:
-            name = 'World'
-        return 'Hello, ' + name + '!'
+        return("Hello Sensehat Station")
 
     def POST(self, x):
         data = str(web.data(), 'utf-8')
