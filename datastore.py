@@ -40,17 +40,35 @@ class Datastore:
         sql_result = self.SQL.SQLread_all_samples()
         result = []
         for row in sql_result:
-            if row[7] == "":
-                value_ = (row[5])
+            if row[8] == "":
+                value_ = (row[6])
             else:
-                value_ = (row[5], row[6], row[7])
+                value_ = (row[6], row[7], row[8])
 
-            time_at_  = datetime.strptime(row[3], "%Y-%m-%d %H:%M:%S")
-            time_for_ = datetime.strptime(row[4], "%Y-%m-%d %H:%M")
+            time_at_  = datetime.strptime(row[4], "%Y-%m-%d %H:%M:%S")
+            time_for_ = datetime.strptime(row[5], "%Y-%m-%d %H:%M")
 
-            row_ = (row[0], row[1], row[2], time_at_, time_for_, value_, row[8])
+            row_ = (row[0], row[1], row[2], row[3], time_at_, time_for_, value_, row[9])
             result.append(row_)
         return(result)
-           
 
-    
+
+    def read_new_samples(self):
+        sql_result = self.SQL.SQLread_new_samples()
+        result = []
+        for row in sql_result:
+            if row[8] == "":
+                value_ = (row[6])
+            else:
+                value_ = (row[6], row[7], row[8])
+
+            time_at_  = datetime.strptime(row[4], "%Y-%m-%d %H:%M:%S")
+            time_for_ = datetime.strptime(row[5], "%Y-%m-%d %H:%M")
+
+            row_ = (row[0], row[2], row[3], time_at_, time_for_, value_, row[9])
+            result.append(row_)
+        return(result)
+
+    def update_sample_status(self, samples, newStatus):
+        for sample in samples:
+            self.SQL.SQLupdate_sample_status(sample[0], newStatus)

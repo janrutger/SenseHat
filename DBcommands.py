@@ -14,7 +14,7 @@ class SQL:
 
     def SQLread_all_samples(self):
         if self.dbtype == "lite" or self.dbtype == "mem":
-            sql = """SELECT sample_id, station_id, parameter, time_at, time_for, value, value1, value2, units FROM samplestable"""
+            sql = """SELECT sample_id, status, station_id, parameter, time_at, time_for, value, value1, value2, units FROM samplestable"""
             result = self.connection.execute(sql)
             result = result.fetchall()
             return(result)
@@ -33,6 +33,7 @@ class SQL:
             self.connection.execute(
                 """create table if not exists samplestable (
                         sample_id  text PRIMARY KEY, 
+                        status text DEFAULT 'new',
                         station_id text NOT NULL,
                         parameter  text NOT NULL,
                         time_at  text NOT NULL,
@@ -43,3 +44,18 @@ class SQL:
                         units  text NOT NULL 
                         ) 
                     """)
+
+
+    def SQLread_new_samples(self):
+        if self.dbtype == "lite" or self.dbtype == "mem":
+            sql = """SELECT sample_id, status, station_id, parameter, time_at, time_for, value, value1, value2, units FROM samplestable WHERE status = 'new' """
+            result = self.connection.execute(sql)
+            result = result.fetchall()
+            return(result)
+
+
+    def SQLupdate_sample_status(self, sample_id, new_status):
+        if self.dbtype == "lite" or self.dbtype == "mem":
+            sql = """UPDATE samplestable SET status = ? WHERE sample_ID = ? """
+            self.connection.execute(sql, (new_status, sample_id))
+            self.connection.commit()

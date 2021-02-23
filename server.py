@@ -14,7 +14,9 @@ app = web.application(urls, globals())
 
 class hello:
     def __init__(self):
-        database = ds.Datastore("lite")
+        pass
+        #database = ds.Datastore("lite")
+
     def GET(self, name):
         if not name:
             name = 'World'
@@ -27,10 +29,12 @@ class hello:
 
         for row in data:
             print(row)
-            database.store_sample(row[1], row[2], (row[5],), row[6])
+
+        return("oke")
+            #database.store_sample(row[1], row[2], (row[5],), row[6])
         
-        samples = database.read_all_samples()
-        print(samples)
+        #samples = database.read_all_samples()
+        #print(samples)
 
         #value = data["name"]
         #return "Hello " + value + "!"
