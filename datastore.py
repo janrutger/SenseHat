@@ -72,3 +72,7 @@ class Datastore:
     def update_sample_status(self, samples, newStatus):
         for sample in samples:
             self.SQL.SQLupdate_sample_status(sample[0], newStatus)
+
+    
+    def clean_samples_table(self, threshold):
+        self.SQL.SQLdelete_samples(threshold)

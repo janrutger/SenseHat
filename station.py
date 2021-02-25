@@ -19,17 +19,23 @@ def main():
     samplesDB = ds.Datastore("mem")
     sender = dsend.Datasender()
 
-    sampleFreq = 60 # in seconden (1 minuut)
+    sampleFreq = 6 # in seconden (1 minuut)
     collect = True
     lastSendTime = time.time()
-    sendFreq = 300 # in seconden (5 minuten)
+    lastCleanTime = time.time()
+    sendFreq = 30 # in seconden (5 minuten)
+    cleanFreq = 360
+
+    threshold = 0 # in dagen 
 
     while collect:
         starttime = time.time()
-        for parameter in parameters:
-            value, units = hat.read(parameter)
-            samplesDB.store_sample(station_id, parameter, value, units)
-        
+
+        #clean cache database
+        if time.time() - lastCleanTime >= cleanFreq:
+            samplesDB.clean_samples_table(threshold)
+            lastCleanTime = time.time()
+        #send unsend samples
         if time.time() - lastSendTime >= sendFreq:
             newSamples = samplesDB.read_new_samples()
             #print("send data", newSample)
@@ -39,14 +45,18 @@ def main():
                 lastSendTime = time.time()
         else:
             print(time.time() - lastSendTime)
-
-    
+        #get new samples per parameter
+        for parameter in parameters:
+            value, units = hat.read(parameter)
+            samplesDB.store_sample(station_id, parameter, value, units)
+        
+        #Show current samples in cache 
         samples = samplesDB.read_all_samples()
-
         df = pd.DataFrame(samples, columns =['sample_id', 'status', 'station_id', 'parameter', 'time_at', 'time_for', 'values', 'units']) 
-        df = df.set_index('sample_id')
+        df = df.set_index('status')
         print(df)
 
+        #sleep sampleFreq
         if (sampleFreq- (time.time()-starttime)) > 0:
             time.sleep(sampleFreq- (time.time()-starttime))
 

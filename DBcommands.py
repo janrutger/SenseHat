@@ -59,3 +59,14 @@ class SQL:
             sql = """UPDATE samplestable SET status = ? WHERE sample_ID = ? """
             self.connection.execute(sql, (new_status, sample_id))
             self.connection.commit()
+
+    
+    def SQLdelete_samples(self, threshold):
+        if self.dbtype == "lite" or self.dbtype == "mem":
+            sql = """DELETE FROM samplestable WHERE julianday('now') - julianday(time_at) >= ? AND status = 'send';"""
+            self.connection.execute(sql, (threshold,))
+            self.connection.commit()
+            self.connection.execute('vacuum')
+
+
+#DELETE FROM samplestable WHERE julianday('now') - julianday(time_at) >= 0 AND status = 'send';
