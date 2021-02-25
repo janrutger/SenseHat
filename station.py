@@ -37,8 +37,7 @@ def main():
             lastCleanTime = time.time()
         #send unsend samples
         if time.time() - lastSendTime >= sendFreq:
-            newSamples = samplesDB.read_new_samples()
-            #print("send data", newSample)
+            newSamples = samplesDB.read_new_samples()  
             result = sender.send_samples(newSamples)
             if result != "error":
                 samplesDB.update_sample_status(newSamples, "send")
