@@ -19,12 +19,12 @@ def main():
     samplesDB = ds.Datastore("mem")
     sender = dsend.Datasender()
 
-    sampleFreq = 6 # in seconden (1 minuut)
+    sampleFreq = 60 # in seconden (1 minuut)
     collect = True
     lastSendTime = time.time()
     lastCleanTime = time.time()
-    sendFreq = 30 # in seconden (5 minuten)
-    cleanFreq = 360
+    sendFreq = 300 # in seconden (5 minuten)
+    cleanFreq = 901 # in seconds (15 minuten)
 
     threshold = 0 # in dagen 
 
