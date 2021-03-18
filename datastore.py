@@ -42,11 +42,6 @@ class Datastore:
         sql_result = self.SQL.SQLread_all_samples()
         result = []
         for row in sql_result:
-            # if row[8] == "":
-            #     value_ = (row[6],)
-            # else:
-            #     value_ = (row[6], row[7], row[8])
-
             value_ = self.valueformat.format(row[3], row[6], row[7], row[8])
 
             time_at_  = datetime.strptime(row[4], "%Y-%m-%d %H:%M:%S")
@@ -61,10 +56,6 @@ class Datastore:
         sql_result = self.SQL.SQLread_new_samples()
         result = []
         for row in sql_result:
-            # if row[8] == "":
-            #     value_ = (row[6],)
-            # else:
-            #     value_ = (row[6], row[7], row[8])
 
             value_ = self.valueformat.format(row[3], row[6], row[7], row[8])
 
