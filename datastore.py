@@ -3,6 +3,7 @@ from hashlib import sha256
 from datetime import datetime
 
 import DBcommands as dbc
+import value_formatter as F
 
 
 class Datastore:
@@ -11,6 +12,7 @@ class Datastore:
         self.SQL = dbc.SQL(self.dbtype)
         self.SQL.SQLcreate_samples_table()
         
+        self.valueformat = F.Formatter()
 
     def store_sample(self, station_id, parameter, _value, units):
         station_id  = station_id
@@ -40,10 +42,12 @@ class Datastore:
         sql_result = self.SQL.SQLread_all_samples()
         result = []
         for row in sql_result:
-            if row[8] == "":
-                value_ = (row[6],)
-            else:
-                value_ = (row[6], row[7], row[8])
+            # if row[8] == "":
+            #     value_ = (row[6],)
+            # else:
+            #     value_ = (row[6], row[7], row[8])
+
+            value_ = self.valueformat.format(row[3], row[6], row[7], row[8])
 
             time_at_  = datetime.strptime(row[4], "%Y-%m-%d %H:%M:%S")
             time_for_ = datetime.strptime(row[5], "%Y-%m-%d %H:%M")
@@ -57,10 +61,12 @@ class Datastore:
         sql_result = self.SQL.SQLread_new_samples()
         result = []
         for row in sql_result:
-            if row[8] == "":
-                value_ = (row[6],)
-            else:
-                value_ = (row[6], row[7], row[8])
+            # if row[8] == "":
+            #     value_ = (row[6],)
+            # else:
+            #     value_ = (row[6], row[7], row[8])
+
+            value_ = self.valueformat.format(row[3], row[6], row[7], row[8])
 
             time_at_  = datetime.strptime(row[4], "%Y-%m-%d %H:%M:%S")
             time_for_ = datetime.strptime(row[5], "%Y-%m-%d %H:%M")
