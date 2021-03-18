@@ -41,7 +41,7 @@ class Datastore:
         result = []
         for row in sql_result:
             if row[8] == "":
-                value_ = (row[6])
+                value_ = (row[6],)
             else:
                 value_ = (row[6], row[7], row[8])
 
@@ -58,7 +58,7 @@ class Datastore:
         result = []
         for row in sql_result:
             if row[8] == "":
-                value_ = (row[6])
+                value_ = (row[6],)
             else:
                 value_ = (row[6], row[7], row[8])
 
