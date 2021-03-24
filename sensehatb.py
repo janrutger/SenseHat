@@ -20,14 +20,14 @@ class  Board:
         self.station_id = "station1"
 
         self.cpu = CPUTemperature()
-        # self.sht = adafruit_shtc3.SHTC3(self.i2c)
-        # self.lps = adafruit_lps2x.LPS22(self.i2c, 0x5c)
+        self.sht = adafruit_shtc3.SHTC3(self.i2c)
+        self.lps = adafruit_lps2x.LPS22(self.i2c, 0x5c)
 
-        # self.tcs = adafruit_tcs34725.TCS34725(self.i2c)
-        # self.tcs.integration_time = 200
+        self.tcs = adafruit_tcs34725.TCS34725(self.i2c)
+        self.tcs.integration_time = 200
 
-        # self.icm = adafruit_icm20x.ICM20948(self.i2c, 0x68)
-        # self.ads = ADS.ADS1015(self.i2c)
+        self.icm = adafruit_icm20x.ICM20948(self.i2c, 0x68)
+        self.ads = ADS.ADS1015(self.i2c)
 
     def config(self, part):
         if part == "parameters":

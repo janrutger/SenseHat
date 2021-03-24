@@ -13,7 +13,7 @@ import pandas as pd
 def main():
     hat = Board()
     parameters = hat.config("parameters")
-    parameters =  "temperatureCPU",
+    #parameters =  "temperatureCPU",
     station_id = hat.config("name")
 
     samplesDB = ds.Datastore("mem")
@@ -58,7 +58,7 @@ def main():
         #sleep sampleFreq
         if (sampleFreq- (time.time()-starttime)) > 0:
             time.sleep(sampleFreq- (time.time()-starttime))
-
+            
 
 
 if __name__ == "__main__":
