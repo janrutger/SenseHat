@@ -12,21 +12,21 @@ import pandas as pd
 
 def main():
     hat = Board()
-    parameters = hat.config("parameters")
-    #parameters =  "temperatureCPU",
+    #parameters = hat.config("parameters")
+    parameters = hat.config("shortlist")
     station_id = hat.config("name")
 
     samplesDB = ds.Datastore("mem")
     sender = dsend.Datasender()
 
-    sampleFreq = 6 # in seconden (1 minuut)
+    sampleFreq = 1260 # in seconden (21 minuut)
     collect = True
     lastSendTime = time.time()
     lastCleanTime = time.time()
-    sendFreq = 30 # in seconden (5 minuten)
-    cleanFreq = 90 # in seconds (15 minuten)
+    sendFreq = 3600 # in seconden (60 minuten)
+    cleanFreq = 14400 # in seconds (4x60 minuten)
 
-    threshold = 0.05 # in dagen 
+    threshold = 1.1 # in dagen 
 
     while collect:
         starttime = time.time()

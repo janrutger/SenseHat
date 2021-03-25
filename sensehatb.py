@@ -36,6 +36,10 @@ class  Board:
             "lux", "color-temperature", "color-rgb",
             "acceleration", "gyro", "magnetic",
             "external1", "external2", "external3", "external4"])
+        if part == "shortlist":
+            return(["temperatureCPU", "temperature", "Humidity",
+            "temperature2", "pressure",
+            "lux", "color-temperature", "color-rgb"])
         if part == "name":
             return(self.station_id)
 
