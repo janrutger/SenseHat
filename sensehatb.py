@@ -17,7 +17,7 @@ from adafruit_ads1x15.analog_in import AnalogIn
 class  Board:
     def __init__(self):
         self.i2c = busio.I2C(board.SCL, board.SDA)
-        self.station_id = "station1"
+        self.station_id = "Amsterdam"
 
         self.cpu = CPUTemperature()
         self.sht = adafruit_shtc3.SHTC3(self.i2c)
@@ -46,11 +46,11 @@ class  Board:
     def read(self, parameter):
         if parameter == "temperatureCPU":
             value = (self.cpu.temperature,)
-            unit = "C"
+            unit = "c"
             return(value, unit)
         elif parameter == "temperature":
             value = (self.sht.temperature,)
-            unit = "C"
+            unit = "c"
             return(value, unit)
         elif parameter == "Humidity":
             value = (self.sht.relative_humidity,)
@@ -58,7 +58,7 @@ class  Board:
             return(value, unit)
         elif parameter == "temperature2":
             value = (self.lps.temperature,)
-            unit = "C"
+            unit = "c"
             return(value, unit)
         elif parameter == "pressure":
             value = (self.lps.pressure,)
@@ -74,7 +74,7 @@ class  Board:
             return(value, unit)
         elif parameter == "color-rgb":
             value = (self.tcs.color_rgb_bytes)
-            unit = "RGB"
+            unit = "rgb"
             return(value, unit)
         elif parameter == "acceleration":
             value = (self.icm.acceleration)

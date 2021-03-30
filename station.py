@@ -19,11 +19,11 @@ def main():
     samplesDB = ds.Datastore("mem")
     sender = dsend.Datasender()
 
-    sampleFreq = 1260 # in seconden (21 minuut)
+    sampleFreq = 1020 # in seconden (17 minuut)
     collect = True
     lastSendTime = time.time()
     lastCleanTime = time.time()
-    sendFreq = 3600 # in seconden (60 minuten)
+    sendFreq = 1200 # in seconden (30 minuten)
     cleanFreq = 14400 # in seconds (4x60 minuten)
 
     threshold = 1.1 # in dagen 
@@ -35,6 +35,12 @@ def main():
         if time.time() - lastCleanTime >= cleanFreq:
             samplesDB.clean_samples_table(threshold)
             lastCleanTime = time.time()
+        
+        #get new samples per parameter
+        for parameter in parameters:
+            value, units = hat.read(parameter)
+            samplesDB.store_sample(station_id, parameter, value, units)
+
         #send unsend samples
         if time.time() - lastSendTime >= sendFreq:
             newSamples = samplesDB.read_new_samples()  
@@ -44,10 +50,6 @@ def main():
                 lastSendTime = time.time()
         else:
             print(time.time() - lastSendTime)
-        #get new samples per parameter
-        for parameter in parameters:
-            value, units = hat.read(parameter)
-            samplesDB.store_sample(station_id, parameter, value, units)
         
         #Show current samples in cache 
         samples = samplesDB.read_all_samples()
