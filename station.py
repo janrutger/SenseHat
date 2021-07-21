@@ -23,7 +23,7 @@ def main():
     collect = True
     lastSendTime = time.time()
     lastCleanTime = time.time()
-    sendFreq = 1200 # in seconden (30 minuten)
+    sendFreq = 15*60 # in seconden (15 minuten)
     cleanFreq = 14400 # in seconds (4x60 minuten)
 
     threshold = 1.1 # in dagen 

@@ -5,7 +5,8 @@ import datetime
 
 class Datasender:
     def __init__(self):
-        self.url     = "http://192.168.2.18:5000"
+        #self.url     = "http://192.168.2.18:5000"
+        self.url     = "http://rest:5000"
         self.headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
 
